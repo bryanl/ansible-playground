@@ -1,7 +1,6 @@
 ---
 
 # bootstrap vars
-domain: pifft.com
 size_id: 64
 region_id: 8
 image_id: 5141286

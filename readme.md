@@ -28,11 +28,11 @@ The goal with this set of tasks is bring up new Digital Ocean Droplets.
 
 `ansible-playbook provision.yml -i ./hosts -u root --private-key ~/.ssh/id_rsa -e "group=servers domain=example.com`
 
-This will provision the two servers defined in the inventory file `hosts` and configure DNS using Dnsimple. The `domain` key is used to determin the DNS domain to update.
+This will provision the two servers defined in the inventory file `hosts` and configure DNS using Dnsimple. The `domain` key is used to determine the DNS domain to update.
 
 ## Terminating hosts
 
-The goal with this set of tasks is to shutdown servers that were configured before. Currently removing DNS does not work correctly.
+The goal with this set of tasks is to shutdown servers that were configured before. 
 
 `ansible-playbook terminate.yml -i ./hosts`
 
