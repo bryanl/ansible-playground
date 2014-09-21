@@ -1,0 +1,13 @@
+---
+- name: terminate droplets
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars_files:
+    - vars/external_vars.yml
+  tasks:
+    - include: tasks/kill_droplet.yml
+      vars:
+        role: "{{ group }}"
+
+# vim: set ft=ansible

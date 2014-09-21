@@ -1,0 +1,21 @@
+---
+- name: configure docker apt key
+  apt_key: keyserver=keyserver.ubuntu.com id=36A1D7869245C8950F966E92D8576A8BA88D21E9
+
+- name: configure mesos apt key
+  apt_key: keyserver=keyserver.ubuntu.com id=E56151BF
+
+- name: configure mesos apt source
+  apt_repository: repo='deb http://repos.mesosphere.io/ubuntu trusty main' state=present
+
+- name: configure docker apt source
+  apt_repository: repo='deb http://get.docker.io/ubuntu docker main' state=present
+
+- name: install docker
+  apt: name=lxc-docker update_cache=yes
+
+- name: install mesos
+  apt: name=mesos update_cache=yes
+
+
+

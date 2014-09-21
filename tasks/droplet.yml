@@ -1,0 +1,38 @@
+# vim: set ft=ansible
+---
+- name: launch droplet
+  local_action:
+    module: digital_ocean
+    state: present
+    command: droplet
+    name: "{{ item }}"
+    size_id: "{{ size_id }}"
+    region_id: "{{ region_id }}"
+    image_id: "{{ image_id }}"
+    wait_timeout: "{{ wait_timeout }}"
+    ssh_key_ids: "{{ ssh_key_ids }}"
+  register: droplets
+  with_items: hosts
+
+- name: add instance to host group
+  local_action: add_host name={{ item.droplet.ip_address }} groups={{ role }}
+  with_items: droplets.results
+
+- name: wait for ssh to come up
+  local_action: >
+    wait_for port=22 host="{{ item.droplet.ip_address }}"
+    search_regex=OpenSSH delay=5 timeout=120
+  with_items: droplets.results
+
+- name: add host to dns
+  local_action: > 
+    dnsimple domain={{ domain }} state=present ttl=60 solo=yes type=A
+    record={{ item.droplet.name | regex_replace("\." + domain, "") }}
+    value={{ item.droplet.ip_address }}
+  with_items: droplets.results
+
+- name: write droplet id to file
+  local_action: template dest="vars/{{ role }}_ids.yml" src="droplet_ids.j2"
+- debug: msg="{{ droplets }}"
+
+

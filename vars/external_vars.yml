@@ -1,0 +1,9 @@
+---
+
+# bootstrap vars
+domain: pifft.com
+size_id: 64
+region_id: 8
+image_id: 5141286
+ssh_key_ids: 104064
+wait_timeout: 500

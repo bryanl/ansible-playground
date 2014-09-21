@@ -1,0 +1,12 @@
+localhost ansible_connection=local
+
+[mesos_masters]
+master01.l2.pifft.com
+
+[mesos_minions]
+minion01.l2.pifft.com
+minion02.l2.pifft.com
+
+[mesos:children]
+mesos_masters
+mesos_minions

@@ -1,0 +1,7 @@
+---
+hosts:
+{% for result in droplets.results %}
+  - host: {{ result.droplet.name }}
+    id: {{ result.droplet.id }}
+    ip: {{ result.droplet.ip_address }}
+{% endfor %}

@@ -1,0 +1,17 @@
+---
+- include_vars: vars/{{ role }}_ids.yml
+- name: terminate droplet
+  local_action: 
+    module: digital_ocean
+    state: deleted
+    command: droplet
+    id: "{{ item.id }}"
+  with_items: hosts 
+
+- name: remove host from dns
+  local_action: >
+    dnsimple domain={{ domain }} state=absent type=A
+    value={{ item.ip }}
+    record={{ item.host | regex_replace("\." + domain, "") }}
+  with_items: hosts
+

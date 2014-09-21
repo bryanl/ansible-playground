@@ -1,0 +1,13 @@
+---
+- name: create droplet
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - vars/external_vars.yml
+  tasks:
+    - include: tasks/droplet.yml
+      vars:
+        hosts: "{{ groups[group] }}"
+        role: "{{ group }}"
+
+# vim: set ft=ansible
