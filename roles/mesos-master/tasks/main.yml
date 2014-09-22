@@ -1,0 +1,14 @@
+- name: enable zookeeper
+  service: name=zookeeper state=started
+  
+- name: configure mesos ip
+  template: src=ip.j2 dest=/etc/mesos-master/ip mode=0644
+  notify:
+    - restart mesos-master
+
+#- name: install marathon
+  #apt: name=marathon 
+
+- name: show master URL
+  debug: msg="mesos master at http://{{ ansible_fqdn }}:5050"
+

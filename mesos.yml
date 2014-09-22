@@ -1,0 +1,13 @@
+---
+- hosts: mesos
+  roles:
+    - mesos-common
+
+- hosts: mesos_masters
+  roles:
+    - mesos-master
+
+- hosts: mesos_minions
+  roles:
+    - mesos-minion
+

@@ -1,0 +1,22 @@
+- name: disable zookeeper
+  service: name=zookeeper state=stopped
+
+- name: configure mesos containerizers
+  template: src=containerizers.j2 dest=/etc/mesos-slave/containerizers mode=0644
+  notify:
+    - restart mesos-slave
+  
+- name: configure mesos ip
+  template: src=ip.j2 dest=/etc/mesos-slave/ip mode=0644
+  notify:
+    - restart mesos-slave
+
+- name: configure mesos master
+  template: src=zk.j2 dest=/etc/mesos/zk mode=0644
+  notify:
+    - restart mesos-slave
+
+- name: configure mesos executor registration timeout
+  template: src=executor_registration_timeout.j2 dest=/etc/mesos-slave/executor_registration_timeout mode=0644
+  notify:
+    - restart mesos-slave
