@@ -6,6 +6,7 @@
 - hosts: mesos_masters
   roles:
     - mesos-master
+    - marathon
 
 - hosts: mesos_minions
   roles:
