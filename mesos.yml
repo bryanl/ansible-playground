@@ -13,3 +13,6 @@
   roles:
     - mesos-minion
 
+- hosts: mesos_lbs
+  roles:
+    - mesos-lb

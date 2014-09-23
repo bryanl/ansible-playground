@@ -1,0 +1,9 @@
+---
+- name: download script
+  get_url: url={{ mesos_lb_url }} dest=/tmp/haproxy-marathon-bridge mode=0755
+
+- name: install haproxy handler
+  command: /tmp/haproxy-marathon-bridge install_haproxy_system http://master01.l2.pifft.com:8080
+    #creates=/usr/local/bin/haproxy-marathon-bridge
+
+
