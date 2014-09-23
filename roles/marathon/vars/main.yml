@@ -1,9 +1,11 @@
 marathon_version: "v0.7.0-RC4"
-marathon_git_url: "https://github.com/mesosphere/marathon.git"
+marathon_sha256: "c7d845386509ea70381363a5ee92ac0275497b4a67380d960838e7dbf79e6748"
+marathon_url: "http://downloads.mesosphere.io/marathon/v{{marathon_version}}/marathon-{{marathon_version}}.tgz"
 marathon_install_location: "/opt/marathon"
 marathon_install_jar: "{{ marathon_install_location }}/marathon.jar"
 marathon_target_jar_name: "marathon-runnable.jar"
 marathon_target_jar_location: "{{marathon_install_location}}/target/{{marathon_target_jar_name}}"
+marathon_git_url: "https://github.com/mesosphere/marathon.git"
 
 sbt_version: "0.13.6"
 sbt_url: "http://dl.bintray.com/sbt/debian/sbt-{{sbt_version}}.deb"

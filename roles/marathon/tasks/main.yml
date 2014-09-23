@@ -1,32 +1,5 @@
 ---
-- name: Check install location
-  file: path={{marathon_install_location}} state=directory
 
-- name: install debian packages
-  apt: pkg={{ item }} state=present update_cache=yes
-  with_items:
-    - git
-    - openjdk-7-jdk
-
-- name: create marathon init file
-  template: src=marathon.j2 dest=/etc/init/marathon.conf
-    owner="root" group="root" mode=0664
-
-- name: download sbt version {{sbt_version}}
-  get_url: url={{sbt_url}} dest={{sbt_dest_file}}
-
-- name: install sbt for Debian
-  apt: deb={{sbt_dest_file}} dpkg_options="force-depends"
-
-- name: clone Marathon git repo
-  git: repo={{marathon_git_url}} dest={{marathon_install_location}} version={{marathon_version}}
-
-- name: run sbt assembly
-  shell: cd {{marathon_install_location}} && sbt assembly && ./bin/build-distribution
-
-- name: copy compiled Marathon jar to {{marathon_install_jar}}
-  command: cp {{marathon_target_jar_location}} {{marathon_install_jar}}
+- name: install marathon
+  apt: pkg=marathon state=present update_cache=yes
   notify: restart marathon
-
-- name: start marathon
-  service: name=marathon state=started enabled=yes
