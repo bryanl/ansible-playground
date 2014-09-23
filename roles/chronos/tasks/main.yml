@@ -1,0 +1,5 @@
+---
+
+- name: install chronos
+  apt: pkg=chronos state=present update_cache=yes
+  notify: restart chronos

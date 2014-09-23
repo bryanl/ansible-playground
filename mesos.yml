@@ -7,6 +7,7 @@
   roles:
     - mesos-master
     - marathon
+    - chronos
 
 - hosts: mesos_minions
   roles:
