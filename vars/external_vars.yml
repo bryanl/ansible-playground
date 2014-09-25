@@ -1,7 +1,7 @@
 ---
 
 # bootstrap vars
-size_id: 64
+size_id: 65
 region_id: 8
 image_id: 5141286
 ssh_key_ids: 104064

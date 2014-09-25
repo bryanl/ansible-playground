@@ -6,8 +6,20 @@
   notify:
     - restart mesos-master
 
-#- name: install marathon
-  #apt: name=marathon 
+- name: configure mesos master
+  template: src=zk.j2 dest=/etc/mesos/zk mode=0644
+  notify:
+    - restart mesos-master
+
+- name: mesos cluster name
+  template: src=cluster.j2 dest=/etc/mesos-master/cluster mode=0644
+  notify:
+    - restart mesos-master
+
+- name: mesos quorum
+  template: src=quorum.j2 dest=/etc/mesos-master/quorum mode=0644
+  notify:
+    - restart mesos-master
 
 - name: show master URL
   debug: msg="mesos master at http://{{ ansible_fqdn }}:5050"

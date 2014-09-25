@@ -14,6 +14,10 @@
   apt: name=lxc-docker update_cache=yes
 
 - name: install mesos
-  apt: name=mesos update_cache=yes
+  apt: name=mesos update_cache=yes state=latest
+
+- lineinfile: dest=/etc/hosts regexp='.*{{item}}$'
+    line='${hostvars.${item}.ansible_default_ipv4.address} ${item}' state=present
+  with_items: groups['mesos']
 
 
